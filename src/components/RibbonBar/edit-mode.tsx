@@ -101,7 +101,7 @@ function EditField<
 	useLayoutEffect(() => {
 		setFieldInput(currentValue?.value);
 		if (currentValue?.multiplieValues) {
-			setFieldPlaceholder("多个值...");
+			setFieldPlaceholder("Multiple Values...");
 		} else {
 			setFieldPlaceholder("");
 		}
@@ -277,118 +277,13 @@ function CheckboxField<
 	);
 }
 
-// function DropdownField<
-// 	L extends Word extends true ? LyricWord : LyricLine,
-// 	F extends keyof L,
-// 	Word extends boolean | undefined = undefined,
-// >({
-// 	label,
-// 	isWordField,
-// 	fieldName,
-// 	children,
-// 	defaultValue,
-// }: {
-// 	label: string;
-// 	isWordField: Word;
-// 	fieldName: F;
-// 	defaultValue: L[F];
-// 	children?: ReactNode | undefined;
-// }) {
-// 	const itemAtom = useMemo(
-// 		() => (isWordField ? selectedWordsAtom : selectedLinesAtom),
-// 		[isWordField],
-// 	);
-// 	const selectedItems = useAtomValue(itemAtom);
-
-// 	const [lyricLines, editLyricLines] = useAtom(currentLyricLinesAtom);
-
-// 	const currentValue = useMemo(() => {
-// 		if (selectedItems.size) {
-// 			if (isWordField) {
-// 				const selectedWords = selectedItems as Set<string>;
-// 				const values = new Set();
-// 				for (const line of lyricLines.lyricLines) {
-// 					for (const word of line.words) {
-// 						if (selectedWords.has(word.id)) {
-// 							values.add(word[fieldName as keyof LyricWord]);
-// 						}
-// 					}
-// 				}
-// 				if (values.size === 1)
-// 					return {
-// 						multiplieValues: false,
-// 						value: values.values().next().value as L[F],
-// 					} as const;
-// 				return {
-// 					multiplieValues: true,
-// 					value: "",
-// 				} as const;
-// 			}
-// 			const selectedLines = selectedItems as Set<string>;
-// 			const values = new Set();
-// 			for (const line of lyricLines.lyricLines) {
-// 				if (selectedLines.has(line.id)) {
-// 					values.add(line[fieldName as keyof LyricLine]);
-// 				}
-// 			}
-// 			if (values.size === 1)
-// 				return {
-// 					multiplieValues: false,
-// 					value: values.values().next().value as L[F],
-// 				} as const;
-// 			return {
-// 				multiplieValues: true,
-// 				value: "",
-// 			} as const;
-// 		}
-// 		return undefined;
-// 	}, [selectedItems, fieldName, isWordField, lyricLines]);
-
-// 	return (
-// 		<>
-// 			<Text wrap="nowrap" size="1">
-// 				{label}
-// 			</Text>
-// 			<Select.Root
-// 				size="1"
-// 				disabled={selectedItems.size === 0}
-// 				defaultValue={defaultValue as string}
-// 				value={(currentValue?.value as string) ?? ""}
-// 				onValueChange={(value) => {
-// 					editLyricLines((state) => {
-// 						for (const line of state.lyricLines) {
-// 							if (isWordField) {
-// 								for (const word of line.words) {
-// 									if (selectedItems.has(word.id)) {
-// 										(word as L)[fieldName] = value as L[F];
-// 									}
-// 								}
-// 							} else {
-// 								if (selectedItems.has(line.id)) {
-// 									(line as L)[fieldName] = value as L[F];
-// 								}
-// 							}
-// 						}
-// 						return state;
-// 					});
-// 				}}
-// 			>
-// 				<Select.Trigger
-// 					placeholder={selectedItems.size > 0 ? "多个值..." : undefined}
-// 				/>
-// 				<Select.Content>{children}</Select.Content>
-// 			</Select.Root>
-// 		</>
-// 	);
-// }
-
 export const EditModeRibbonBar: FC = forwardRef<HTMLDivElement>(
 	(_props, ref) => {
 		const editLyricLines = useSetAtom(lyricLinesAtom);
 
 		return (
 			<RibbonFrame ref={ref}>
-				<RibbonSection label="新建">
+				<RibbonSection label="New">
 					<Grid columns="1" gap="1" gapY="1" flexGrow="1" align="center">
 						<Button
 							size="1"
@@ -406,62 +301,62 @@ export const EditModeRibbonBar: FC = forwardRef<HTMLDivElement>(
 						</Button>
 					</Grid>
 				</RibbonSection>
-				<RibbonSection label="行时间戳">
+				<RibbonSection label="Line Timestamp">
 					<Grid columns="0fr 1fr" gap="2" gapY="1" flexGrow="1" align="center">
 						<EditField
-							label="起始时间"
+							label="Start Time"
 							fieldName="startTime"
 							parser={parseTimespan}
 							formatter={msToTimestamp}
 						/>
 						<EditField
-							label="结束时间"
+							label="End Time"
 							fieldName="endTime"
 							parser={parseTimespan}
 							formatter={msToTimestamp}
 						/>
 					</Grid>
 				</RibbonSection>
-				<RibbonSection label="行属性">
+				<RibbonSection label="Line Properties">
 					<Grid columns="0fr 1fr" gap="2" gapY="1" flexGrow="1" align="center">
 						<CheckboxField
-							label="背景歌词"
+							label="Background Vocal"
 							isWordField={false}
 							fieldName="isBG"
 							defaultValue={false}
 						/>
 						<CheckboxField
-							label="对唱歌词"
+							label="Duet Vocal"
 							isWordField={false}
 							fieldName="isDuet"
 							defaultValue={false}
 						/>
 						<CheckboxField
-							label="忽略打轴"
+							label="Ignore sync"
 							isWordField={false}
 							fieldName="ignoreSync"
 							defaultValue={false}
 						/>
 					</Grid>
 				</RibbonSection>
-				<RibbonSection label="词时间戳">
+				<RibbonSection label="Timestamps">
 					<Grid columns="0fr 1fr" gap="2" gapY="1" flexGrow="1" align="center">
 						<EditField
-							label="起始时间"
+							label="Start Time"
 							fieldName="startTime"
 							isWordField
 							parser={parseTimespan}
 							formatter={msToTimestamp}
 						/>
 						<EditField
-							label="结束时间"
+							label="End Time"
 							fieldName="endTime"
 							isWordField
 							parser={parseTimespan}
 							formatter={msToTimestamp}
 						/>
 						<EditField
-							label="空拍数量"
+							label="Empty Beat"
 							fieldName="emptyBeat"
 							isWordField
 							parser={Number.parseInt}
@@ -469,34 +364,34 @@ export const EditModeRibbonBar: FC = forwardRef<HTMLDivElement>(
 						/>
 					</Grid>
 				</RibbonSection>
-				<RibbonSection label="单词属性">
+				<RibbonSection label="Word Attribs">
 					<Grid columns="0fr 1fr" gap="2" gapY="1" flexGrow="1" align="center">
 						<EditField
-							label="单词内容"
+							label="Word content"
 							fieldName="word"
 							isWordField
 							parser={(v) => v}
 							formatter={(v) => v}
 						/>
 						<CheckboxField
-							label="不雅用语"
+							label="is expliti"
 							isWordField
 							fieldName="obscene"
 							defaultValue={false}
 						/>
 					</Grid>
 				</RibbonSection>
-				<RibbonSection label="次要内容">
+				<RibbonSection label="Secondary">
 					<Grid columns="0fr 1fr" gap="2" gapY="1" flexGrow="1" align="center">
 						<EditField
-							label="翻译歌词"
+							label="Translated Lyric"
 							fieldName="translatedLyric"
 							parser={(v) => v}
 							formatter={(v) => v}
 							textFieldStyle={{ width: "20em" }}
 						/>
 						<EditField
-							label="音译歌词"
+							label="Roman Lyric"
 							fieldName="romanLyric"
 							parser={(v) => v}
 							formatter={(v) => v}

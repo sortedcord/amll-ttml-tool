@@ -52,7 +52,7 @@ function App() {
 	}
 
 	useEffect(() => {
-		toast.warn("本重构版本仍在开发当中，敬请保存备份你的项目以免发生意外！");
+		toast.warn("This refactored version is still under development, so please make sure to back up your project to avoid any unexpected issues!");
 	}, []);
 
 	useEffect(() => {

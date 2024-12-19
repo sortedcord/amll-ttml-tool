@@ -27,17 +27,17 @@ export const PreviewModeRibbonBar = forwardRef<HTMLDivElement>(
 
 		return (
 			<RibbonFrame ref={ref}>
-				<RibbonSection label="歌词">
+				<RibbonSection label="Lyrics">
 					<Grid columns="0fr 0fr" gap="2" gapY="1" flexGrow="1" align="center">
 						<Text wrap="nowrap" size="1">
-							显示翻译
+						Show Translation
 						</Text>
 						<Checkbox
 							checked={showTranslationLine}
 							onCheckedChange={(v) => setShowTranslationLine(!!v)}
 						/>
 						<Text wrap="nowrap" size="1">
-							显示音译
+						Show Transliteration
 						</Text>
 						<Checkbox
 							checked={showRomanLine}
@@ -45,10 +45,10 @@ export const PreviewModeRibbonBar = forwardRef<HTMLDivElement>(
 						/>
 					</Grid>
 				</RibbonSection>
-				<RibbonSection label="单词">
+				<RibbonSection label="Word">
 					<Grid columns="0fr 0fr" gap="2" gapY="1" flexGrow="1" align="center">
 						<Text wrap="nowrap" size="1">
-							过渡宽度
+							Transition Width
 						</Text>
 						<TextField.Root
 							min={0}

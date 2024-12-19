@@ -32,10 +32,10 @@ export const SyncModeRibbonBar: FC = forwardRef<HTMLDivElement>(
 
 		return (
 			<RibbonFrame ref={ref}>
-				<RibbonSection label="打轴调整">
+				<RibbonSection label="Axis Adjustment">
 					<Grid columns="0fr 0fr" gap="2" gapY="1" flexGrow="1" align="center">
 						<Text wrap="nowrap" size="1">
-							时间戳位移
+						Timestamp Offset
 						</Text>
 						<TextField.Root
 							type="number"
@@ -46,7 +46,7 @@ export const SyncModeRibbonBar: FC = forwardRef<HTMLDivElement>(
 							}}
 						/>
 						<Text wrap="nowrap" size="1">
-							当前空拍
+						Current Empty Beat
 						</Text>
 						<Slider
 							value={[currentEmptyBeat]}
@@ -62,10 +62,10 @@ export const SyncModeRibbonBar: FC = forwardRef<HTMLDivElement>(
 						</Text>
 					</Grid>
 				</RibbonSection>
-				<RibbonSection label="辅助设置">
+				<RibbonSection label="Misc Settings">
 					<Grid columns="0fr 0fr" gap="2" gapY="1" flexGrow="1" align="center">
 						<Text wrap="nowrap" size="1">
-							呈现时间戳更新
+						Render Timestamp Update
 						</Text>
 						<Checkbox
 							checked={visualizeTimestampUpdate}
@@ -73,7 +73,7 @@ export const SyncModeRibbonBar: FC = forwardRef<HTMLDivElement>(
 						/>
 
 						<Text wrap="nowrap" size="1">
-							触控打轴辅助面板
+						Touch Axis Assistance Panel
 						</Text>
 						<Checkbox
 							checked={showTouchSyncPanel}
@@ -81,7 +81,7 @@ export const SyncModeRibbonBar: FC = forwardRef<HTMLDivElement>(
 						/>
 					</Grid>
 				</RibbonSection>
-				<RibbonSection label="打轴键位速查">
+				<RibbonSection label="Axis Key Quick Reference">
 					<Flex gap="4">
 						<Grid
 							columns="0fr 0fr"
@@ -92,15 +92,15 @@ export const SyncModeRibbonBar: FC = forwardRef<HTMLDivElement>(
 							justify="center"
 						>
 							<Text wrap="nowrap" size="1">
-								起始轴
+							Start Axis
 							</Text>
 							<KeyBinding kbdAtom={keySyncStartAtom} />
 							<Text wrap="nowrap" size="1">
-								连续轴
+							Continuous Axis
 							</Text>
 							<KeyBinding kbdAtom={keySyncNextAtom} />
 							<Text wrap="nowrap" size="1">
-								结束轴
+							End Axis
 							</Text>
 							<KeyBinding kbdAtom={keySyncEndAtom} />
 						</Grid>
